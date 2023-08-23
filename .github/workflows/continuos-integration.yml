@@ -36,8 +36,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build Application Jar
-      working-directory: ./skewer
-      run: mvn clean package
+      working-directory: ./
+      run: |
+        - pwd
+        - mvn clean package
 
     - name: Docker Compose Build
       working-directory: ./skewer
