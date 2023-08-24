@@ -37,6 +37,7 @@ jobs:
     - name: Build Application Jar
       working-directory: ./skewer
       run: |
+        - ls
         - pwd
         - mvn clean package
 
