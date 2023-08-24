@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8888
 file:
   upload-dir: /home/runner/work/skewer/UploadDir
 spring:
