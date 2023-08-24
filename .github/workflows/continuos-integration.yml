@@ -36,10 +36,7 @@ jobs:
         cache: maven
     - name: Build Application Jar
       working-directory: /home/runner/work/skewer/skewer
-      run: |
-        - ls
-        - pwd
-        - mvn clean package
+      run: mvn clean package
 
     - name: Docker Compose Build
       working-directory: ./skewer
