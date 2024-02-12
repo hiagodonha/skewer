@@ -21,7 +21,4 @@ spring:
         level:
             org.springframework: info
             org.hibernate: debug
-    # Server configuration
-    server:
-        port: 8080 #set your port
 
