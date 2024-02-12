@@ -23,7 +23,7 @@ services:
       SPRING.DATASOURCE.USERNAME: postgres
       SPRING.DATASOURCE.PASSWORD: 123456
     ports:
-      - 8080:8080
+      - 80:80
     command: mvn spring-boot:run
     depends_on:
       - db
