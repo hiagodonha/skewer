@@ -18,7 +18,7 @@ services:
   skewer:
     image: hiagolaurenco/skewer
     restart: always
-    build: ./skewer
+    build: ./
     working_dir: /skewer
     environment:
       TZ: America/Sao_Paulo
