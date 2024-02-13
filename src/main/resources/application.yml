@@ -1,7 +1,8 @@
 server:
     port: 8080
 file:
-    upload-dir: /home/runner/work/skewer/skewer/skewer/UploadDir
+     upload-dir: /Code/UploadDir
+#    upload-dir: /home/runner/work/skewer/skewer/skewer/UploadDir
 spring:
     datasource:
         driver-class-name: org.postgresql.Driver
