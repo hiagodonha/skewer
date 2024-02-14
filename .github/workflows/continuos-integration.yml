@@ -30,8 +30,11 @@ jobs:
       run: mvn clean package
 
     - name: Docker Compose Build
-      working-directory: ../../
-      run: docker-compose build
+      working-directory: /home/runner/work/
+      run: |
+         sudo snap remove docker
+         sudo apt install docker.io docker-compose
+         docker-compose build
 
     - name: Push to Docker Hub Container Registry
       run: |
