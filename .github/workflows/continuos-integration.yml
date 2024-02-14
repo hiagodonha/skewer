@@ -30,10 +30,8 @@ jobs:
       run: mvn clean package
 
     - name: Docker Compose Build
-      working-directory: /home/runner/work/
-      run: |
-          cd..
-          docker-compose build
+      working-directory: /home/runner/work/skewer/skewer/
+      run: docker-compose build
 
     - name: Push to Docker Hub Container Registry
       run: |
