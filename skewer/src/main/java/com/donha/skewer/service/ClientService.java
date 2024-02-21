@@ -1,53 +1,55 @@
 package com.donha.skewer.service;
 
+import com.donha.skewer.dao.ClientDao;
+import com.donha.skewer.exceptions.ResourceNotFoundException;
 import com.donha.skewer.models.Client;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 @Service
 public class ClientService {
 
+    @Autowired
+    ClientDao dao;
+
     private static final Logger LOGGER  = Logger.getLogger(ClientService.class.getName());
 
     public Client create(Client client) {
         LOGGER.info("creat Client!");
-        return Client.builder().name("DINO").build();
+        return dao.save(client);
     }
 
     public List<Client> findAll() {
         LOGGER.info("Finding all clients!");
-
-        var clients = new ArrayList<Client>();
-        for (int i = 0; i < 8; i++) {
-            var person = mockPerson(i);
-            clients.add(person);
-        }
-
-        return clients;
-    }
-
-    private Client mockPerson(int i) {
-        return Client.builder()
-                .name("Hiago" + i)
-                .cpfCnpj("04695965411" + i)
-                .adress("vila" + i)
-                .email("hiago@gmail.com" + i)
-                .phone("6282156587" + i)
-                .build();
+        return dao.findAll();
     }
 
 
     public Client findById(Long id) {
         LOGGER.info("Finding one client!");
-
-        return Client.builder()
-                .name("Rodrigao")
-                .email("teste@gmail.com")
-                .phone("62982527601")
-                .cpfCnpj("04699592101")
-                .build();
+        return dao.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found!"));
     }
+
+    public Client update(Client client) {
+        LOGGER.info("Updated Client!");
+
+        var entity = dao.findById(client.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("No records found!"));
+
+        client = entity;
+
+        return dao.save(client);
+    }
+
+    public void delete(Long id) {
+        LOGGER.info("Deleted Client!");
+
+        dao.deleteById(id);
+    }
+
 }
