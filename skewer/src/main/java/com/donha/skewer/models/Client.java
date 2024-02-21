@@ -1,17 +1,19 @@
 package com.donha.skewer.models;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@Entity
 @Builder
 @AllArgsConstructor
+@Entity
 @Table(name = "clientes")
 public class Client implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -34,9 +36,19 @@ public class Client implements Serializable {
     private String phone;
 
     @Column(length = 200)
-    private String adress;
+    private String address;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public Client(){}
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -70,13 +82,30 @@ public class Client implements Serializable {
         this.phone = phone;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -87,12 +116,27 @@ public class Client implements Serializable {
                 && Objects.equals(getCpfCnpj(), client.getCpfCnpj())
                 && Objects.equals(getEmail(), client.getEmail())
                 && Objects.equals(getPhone(), client.getPhone())
-                && Objects.equals(getAdress(), client.getAdress());
+                && Objects.equals(getAddress(), client.getAddress())
+                && Objects.equals(getCreatedAt(), client.getCreatedAt())
+                && Objects.equals(getUpdatedAt(), client.getUpdatedAt());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, getName(), getCpfCnpj(), getEmail(), getPhone(), getAdress());
+        return Objects.hash(id, getName(), getCpfCnpj(), getEmail(), getPhone(), getAddress(), getCreatedAt(), getUpdatedAt());
     }
 
+    @Override
+    public String toString() {
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", cpfCnpj='" + cpfCnpj + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
+    }
 }
